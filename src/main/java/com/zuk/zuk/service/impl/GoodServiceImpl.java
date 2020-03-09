@@ -22,7 +22,7 @@ public class GoodServiceImpl implements GoodService {
     @Autowired
     public GoodServiceImpl(GoodRepository goodRepository){
         this.goodRepository = goodRepository;
-    };
+    }
 
     public List<GoodEntity> findAll() {
         return Lists.newArrayList(goodRepository.findAll());

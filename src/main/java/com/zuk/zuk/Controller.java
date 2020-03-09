@@ -1,8 +1,8 @@
 package com.zuk.zuk;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zuk.zuk.service.impl.GoodServiceImpl;
+import com.zuk.zuk.service.impl.TransactionServiceImpl;
+import com.zuk.zuk.service.impl.WorkerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class Controller {
 
     private final GoodServiceImpl goodService;
+    private final TransactionServiceImpl transactionService;
+    private final WorkerServiceImpl workerService;
 
     @Autowired
-    public Controller(@Qualifier("GoodServiceImpl") GoodServiceImpl goodService){this.goodService = goodService;}
+    public Controller(@Qualifier("GoodServiceImpl") GoodServiceImpl goodService, @Qualifier("TransactionServiceImpl") TransactionServiceImpl transactionService, @Qualifier("WorkerServiceImpl") WorkerServiceImpl workerService){
+        this.goodService = goodService;
+        this.transactionService = transactionService;
+        this.workerService = workerService;
+    }
 
     @Autowired
-    JsonMaker jsonMaker;
+    JsonStringMaker jsonStringMaker;
 
     @RequestMapping("/")
     @ResponseBody
@@ -29,13 +35,21 @@ public class Controller {
         return modelAndView;
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/findAllGood")
     @ResponseBody
-    String hello() {
+    String findAllGood() {
+        return jsonStringMaker.listToJson(goodService.findAll());
+    }
 
+    @RequestMapping("/findAllTransaction")
+    @ResponseBody
+    String findAllTransaction() {
+        return jsonStringMaker.listToJson(transactionService.findAll());
+    }
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index.html");
-        return jsonMaker.listToJson(goodService.findAll());
+    @RequestMapping("/findAllWorker")
+    @ResponseBody
+    String findAllWorker() {
+        return jsonStringMaker.listToJson(workerService.findAll());
     }
 }
