@@ -13,6 +13,7 @@ jmx.log
 derby.log
 spring-test/test-output/
 .gradle
+.DS_Store
 argfile*
 pom.xml
 activemq-data/
