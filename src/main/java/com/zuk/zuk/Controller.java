@@ -1,10 +1,14 @@
 package com.zuk.zuk;
 
+import com.zuk.zuk.entity.GoodEntity;
+import com.zuk.zuk.entity.TransactionEntity;
+import com.zuk.zuk.entity.WorkerEntity;
 import com.zuk.zuk.service.impl.GoodServiceImpl;
 import com.zuk.zuk.service.impl.TransactionServiceImpl;
 import com.zuk.zuk.service.impl.WorkerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,4 +56,26 @@ public class Controller {
     String findAllWorker() {
         return jsonStringMaker.listToJson(workerService.findAll());
     }
+
+    @RequestMapping("/saveGood")
+    @ResponseBody
+    String saveGood(@RequestBody GoodEntity good){
+        goodService.save(good);
+        return "good";
+    }
+
+    @RequestMapping("/saveTransaction")
+    @ResponseBody
+    String saveTransaction(@RequestBody TransactionEntity transactionEntity){
+        transactionService.save(transactionEntity);
+        return "good";
+    }
+
+    @RequestMapping("/saveWorker")
+    @ResponseBody
+    String saveWorker(@RequestBody WorkerEntity workerEntity){
+         workerService.save(workerEntity);
+        return "good";
+    }
+
 }

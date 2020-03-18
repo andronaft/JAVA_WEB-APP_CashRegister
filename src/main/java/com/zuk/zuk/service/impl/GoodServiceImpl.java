@@ -27,4 +27,10 @@ public class GoodServiceImpl implements GoodService {
     public List<GoodEntity> findAll() {
         return Lists.newArrayList(goodRepository.findAll());
     }
+
+    @Override
+    public void save(GoodEntity goodEntity) {
+        goodRepository.save(goodEntity);
+    }
+
 }

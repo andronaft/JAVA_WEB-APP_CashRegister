@@ -25,4 +25,9 @@ public class TransactionServiceImpl implements TransactionService {
     public List<TransactionEntity> findAll() {
         return Lists.newArrayList(transactionRepository.findAll());
     }
+
+    @Override
+    public void save(TransactionEntity transactionEntity) {
+        transactionRepository.save(transactionEntity);
+    }
 }

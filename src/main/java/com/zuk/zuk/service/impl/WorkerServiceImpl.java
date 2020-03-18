@@ -25,4 +25,9 @@ public class WorkerServiceImpl implements WorkerService {
     public List<WorkerEntity> findAll() {
         return Lists.newArrayList(workerRepository.findAll());
     }
+
+    @Override
+    public void save(WorkerEntity workerEntity) {
+        workerRepository.save(workerEntity);
+    }
 }
