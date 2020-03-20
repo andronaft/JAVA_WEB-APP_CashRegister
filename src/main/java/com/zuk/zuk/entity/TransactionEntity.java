@@ -1,6 +1,7 @@
 package com.zuk.zuk.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,17 @@ public class TransactionEntity {
     private int id;
     private int idworker;
     private String goods;
+    private Date dateandtime;
+
+    @Basic
+    @Column(name = "DATEANDTIME")
+    public Date getDateandtime() {
+        return dateandtime;
+    }
+
+    public void setDateandtime(Date dateandtime) {
+        this.dateandtime = dateandtime;
+    }
 
     @Id
     @Column(name = "ID")

@@ -4,11 +4,14 @@ import com.zuk.zuk.entity.TransactionEntity;
 import com.zuk.zuk.repository.TransactionRepository;
 import com.zuk.zuk.service.TransactionService;
 import org.assertj.core.util.Lists;
+import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service("TransactionServiceImpl")
@@ -29,5 +32,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void save(TransactionEntity transactionEntity) {
         transactionRepository.save(transactionEntity);
+    }
+
+    @Override
+    public TransactionEntity createTransaction(TransactionEntity transactionEntity) {
+        transactionEntity.setDateandtime(Date.valueOf(LocalDate.now()));
+        save(transactionEntity);
+        return transactionEntity;
     }
 }

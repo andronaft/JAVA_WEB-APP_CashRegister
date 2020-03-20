@@ -8,4 +8,5 @@ public interface TransactionService {
 
     List<TransactionEntity> findAll();
     void save(TransactionEntity transactionEntity);
+    TransactionEntity createTransaction (TransactionEntity transactionEntity);
 }
