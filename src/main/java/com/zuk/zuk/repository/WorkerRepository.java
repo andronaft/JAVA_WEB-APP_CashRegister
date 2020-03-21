@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkerRepository extends CrudRepository<WorkerEntity, Integer> {
+    WorkerEntity findByLogin(String login);
 }

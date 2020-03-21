@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,14 +32,16 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void save(TransactionEntity transactionEntity) {
+    public String save(TransactionEntity transactionEntity) {
+        //temporary
+        transactionEntity.setId(1);
+        transactionEntity.setDateandtime(new Timestamp(System.currentTimeMillis()));
+        transactionEntity.setGoods("1,2");
+        transactionEntity.setIdworker(11);
+        //temporary
+
         transactionRepository.save(transactionEntity);
+        return "good";
     }
 
-    @Override
-    public TransactionEntity createTransaction(TransactionEntity transactionEntity) {
-        transactionEntity.setDateandtime(Date.valueOf(LocalDate.now()));
-        save(transactionEntity);
-        return transactionEntity;
-    }
 }

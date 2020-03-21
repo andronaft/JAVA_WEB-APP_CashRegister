@@ -8,10 +8,7 @@ import com.zuk.zuk.service.impl.TransactionServiceImpl;
 import com.zuk.zuk.service.impl.WorkerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -66,7 +63,9 @@ public class Controller {
 
     @RequestMapping("/saveTransaction")
     @ResponseBody
-    String saveTransaction(@RequestBody TransactionEntity transactionEntity){
+    String saveTransaction()//@RequestBody TransactionEntity transactionEntity){
+    {
+        TransactionEntity  transactionEntity = new TransactionEntity();
         transactionService.save(transactionEntity);
         return "good";
     }
@@ -74,8 +73,15 @@ public class Controller {
     @RequestMapping("/saveWorker")
     @ResponseBody
     String saveWorker(@RequestBody WorkerEntity workerEntity){
-         workerService.save(workerEntity);
+        workerService.save(workerEntity);
         return "good";
+    }
+
+    @RequestMapping("/findByLogin")
+    @ResponseBody
+    String findByLogin(@RequestParam String login)//@RequestBody WorkerEntity workerEntity){
+    {
+        return  workerService.findByLogin(login);
     }
 
 }

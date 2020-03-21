@@ -8,4 +8,5 @@ public interface WorkerService {
 
     List<WorkerEntity> findAll();
     void save(WorkerEntity workerEntity);
+    String findByLogin(String login);
 }

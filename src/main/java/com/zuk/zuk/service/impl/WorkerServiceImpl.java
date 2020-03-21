@@ -30,4 +30,10 @@ public class WorkerServiceImpl implements WorkerService {
     public void save(WorkerEntity workerEntity) {
         workerRepository.save(workerEntity);
     }
+
+    @Override
+    public String findByLogin(String login) {
+
+        return workerRepository.findByLogin(login).getName();
+    }
 }

@@ -2,6 +2,8 @@ package com.zuk.zuk.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.Objects;
 
 @Entity
@@ -10,19 +12,20 @@ public class TransactionEntity {
     private int id;
     private int idworker;
     private String goods;
-    private Date dateandtime;
+    private Timestamp dateandtime;
 
     @Basic
     @Column(name = "DATEANDTIME")
-    public Date getDateandtime() {
+    public Timestamp getDateandtime() {
         return dateandtime;
     }
 
-    public void setDateandtime(Date dateandtime) {
+    public void setDateandtime(Timestamp dateandtime) {
         this.dateandtime = dateandtime;
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "ID")
     public int getId() {
         return id;
