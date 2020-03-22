@@ -1,5 +1,6 @@
 package com.zuk.zuk.service.impl;
 
+import com.zuk.zuk.JsonStringMaker;
 import com.zuk.zuk.entity.GoodEntity;
 import com.zuk.zuk.repository.GoodRepository;
 import com.zuk.zuk.service.GoodService;
@@ -18,14 +19,18 @@ import java.util.List;
 public class GoodServiceImpl implements GoodService {
 
     private final GoodRepository goodRepository;
+    private final JsonStringMaker jsonStringMaker;
+
 
     @Autowired
-    public GoodServiceImpl(GoodRepository goodRepository){
+    public GoodServiceImpl(GoodRepository goodRepository,JsonStringMaker jsonStringMaker){
+        this.jsonStringMaker = jsonStringMaker;
         this.goodRepository = goodRepository;
     }
 
-    public List<GoodEntity> findAll() {
-        return Lists.newArrayList(goodRepository.findAll());
+    @Override
+    public String findAll() {
+        return jsonStringMaker.listToJson(Lists.newArrayList(goodRepository.findAll()));
     }
 
     @Override

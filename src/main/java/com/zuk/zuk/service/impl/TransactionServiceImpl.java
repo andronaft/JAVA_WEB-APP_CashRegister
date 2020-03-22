@@ -1,5 +1,6 @@
 package com.zuk.zuk.service.impl;
 
+import com.zuk.zuk.JsonStringMaker;
 import com.zuk.zuk.entity.TransactionEntity;
 import com.zuk.zuk.repository.TransactionRepository;
 import com.zuk.zuk.service.TransactionService;
@@ -22,26 +23,24 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final JsonStringMaker jsonStringMaker;
 
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository){this.transactionRepository = transactionRepository;}
+    public TransactionServiceImpl(TransactionRepository transactionRepository,JsonStringMaker jsonStringMaker)
+    {
+        this.transactionRepository = transactionRepository;
+        this.jsonStringMaker = jsonStringMaker;
+    }
 
     @Override
-    public List<TransactionEntity> findAll() {
-        return Lists.newArrayList(transactionRepository.findAll());
+    public String findAll() {
+        return jsonStringMaker.listToJson(Lists.newArrayList(transactionRepository.findAll()));
     }
 
     @Override
     public String save(TransactionEntity transactionEntity) {
-        //temporary
-        transactionEntity.setId(1);
         transactionEntity.setDateandtime(new Timestamp(System.currentTimeMillis()));
-        transactionEntity.setGoods("1,2");
-        transactionEntity.setIdworker(11);
-        //temporary
-
-        transactionRepository.save(transactionEntity);
-        return "good";
+        return jsonStringMaker.objectToJson(transactionRepository.save(transactionEntity));
     }
 
 }

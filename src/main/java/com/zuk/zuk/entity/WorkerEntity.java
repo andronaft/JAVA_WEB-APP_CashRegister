@@ -14,6 +14,7 @@ public class WorkerEntity {
     private String role;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID")
     public int getId() {
         return id;

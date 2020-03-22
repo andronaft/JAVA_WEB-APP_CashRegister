@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface GoodService {
 
-    List<GoodEntity> findAll();
+    String findAll();
     void save(GoodEntity goodEntity);
 }

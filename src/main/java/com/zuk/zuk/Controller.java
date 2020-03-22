@@ -39,19 +39,19 @@ public class Controller {
     @RequestMapping("/findAllGood")
     @ResponseBody
     String findAllGood() {
-        return jsonStringMaker.listToJson(goodService.findAll());
+        return goodService.findAll();
     }
 
     @RequestMapping("/findAllTransaction")
     @ResponseBody
     String findAllTransaction() {
-        return jsonStringMaker.listToJson(transactionService.findAll());
+        return transactionService.findAll();
     }
 
     @RequestMapping("/findAllWorker")
     @ResponseBody
     String findAllWorker() {
-        return jsonStringMaker.listToJson(workerService.findAll());
+        return workerService.findAll();
     }
 
     @RequestMapping("/saveGood")
@@ -63,25 +63,34 @@ public class Controller {
 
     @RequestMapping("/saveTransaction")
     @ResponseBody
-    String saveTransaction()//@RequestBody TransactionEntity transactionEntity){
-    {
-        TransactionEntity  transactionEntity = new TransactionEntity();
-        transactionService.save(transactionEntity);
-        return "good";
+    String saveTransaction(@RequestBody TransactionEntity transactionEntity){
+        return transactionService.save(transactionEntity);
     }
 
     @RequestMapping("/saveWorker")
     @ResponseBody
     String saveWorker(@RequestBody WorkerEntity workerEntity){
-        workerService.save(workerEntity);
-        return "good";
+        return workerService.save(workerEntity);
     }
 
     @RequestMapping("/findByLogin")
     @ResponseBody
-    String findByLogin(@RequestParam String login)//@RequestBody WorkerEntity workerEntity){
-    {
+    String findByLogin(@RequestParam String login){
         return  workerService.findByLogin(login);
     }
 
+    @RequestMapping("/login")
+    @ResponseBody
+    String login(@RequestParam String login, @RequestParam String password) {
+        WorkerEntity workerEntity = new WorkerEntity();
+        workerEntity.setLogin(login);
+        workerEntity.setPassword(password);
+        return  workerService.login(workerEntity);
+    }
+
+    @RequestMapping("/register")
+    @ResponseBody
+    String login(@RequestBody WorkerEntity workerEntity) {
+        return  workerService.register(workerEntity);
+    }
 }

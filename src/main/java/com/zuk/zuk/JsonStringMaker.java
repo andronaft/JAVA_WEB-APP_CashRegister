@@ -28,7 +28,35 @@ public class JsonStringMaker {
                 error.add("Woooh");
                 error.add("try later");
                 try {
-                    jsonInString = objectMapper.writeValueAsString(list);
+                    jsonInString = objectMapper.writeValueAsString(error);
+                    return jsonInString;
+                } catch (JsonProcessingException e) {
+                    System.out.println("error with error json");
+                    e.printStackTrace();
+                }
+            }
+        }
+        return jsonInString;
+    }
+
+
+    public String objectToJson(Object object) {
+        jsonInString = "";
+        Boolean isCreateJson = false;
+        try {
+            jsonInString = objectMapper.writeValueAsString(object);
+            isCreateJson = true;
+        } catch (JsonProcessingException e) {
+            System.out.println("error with json");
+            e.printStackTrace();
+        }
+        finally {
+            if(!isCreateJson) {
+                ArrayList<String> error = new ArrayList<String>();
+                error.add("Woooh");
+                error.add("try later");
+                try {
+                    jsonInString = objectMapper.writeValueAsString(error);
                     return jsonInString;
                 } catch (JsonProcessingException e) {
                     System.out.println("error with error json");
